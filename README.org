@@ -6,7 +6,7 @@ Out-of-box offline sneakernet/floppynet, dead drops, sequential and append-only 
 
 It is based on my [[https://github.com/jgoerzen/docker-debian-base][debian-base-security]] image for Debian bullseye.
 
-# Introduction
+* Introduction
 
 You can use the =jgoerzen/nncp= image.  By default, it will:
 
@@ -15,13 +15,13 @@ You can use the =jgoerzen/nncp= image.  By default, it will:
 - Run nncp-toss, cycle 60, without -seen (edit =/etc/systemd/system/nncp-toss.service= to tweak)
 - Provide reasonable cleanup (=/etc/cron.daily=) and log rotation (=/etc/logrotate.d=) for NNCP files, which you can of course override.
 
-# Files
+* Files
 
 The NNCP spool directory is =/var/spool/nncp= and is listed as a volume.  It should be owned by the NNCP user (the startup script will fix this if it's not the case).
 
 The NNCP configuration file is expected to reside in =/usr/local/etc/nncp.hjson=.  If you need one, you can run =nncp-cfgen= from within a container.  It should have restrictive permissions; for instance, mode 0400 and owned by the NNCP user.  You can either add it to an image, or mount something over =/usr/local/etc=.  The commands are in =/usr/local/bin/=.
 
-# Invocation
+* Invocation
 
 Please see the [[https://github.com/jgoerzen/docker-debian-base#container-invocation][docker-debian-base container invocation]] information.  Generally, for a modern system, you'll use something like this:
 
@@ -36,7 +36,7 @@ Information about the daemons can be found with, eg, =journalctl -u nncp-daemon=
 
 Thanks to using debian-base-security, the container will automatically apply Debian security updates at container start and daily while running.  These security updates do not, however, pertain to NNCP itself.
 
-# Copyright
+* Copyright
 
 These files are Copyright (c) 2021 John Goerzen.
 
