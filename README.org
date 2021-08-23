@@ -1,5 +1,41 @@
 #+TITLE: NNCP for Docker
 
+This container provides [[https://nncp.mirrors.quux.org/][NNCP]] for Docker.  NNCP is "intended to help build up small size (dozens of nodes) ad-hoc friend-to-friend (F2F) statically routed darknet delay-tolerant networks for fire-and-forget secure reliable files, file requests, Internet mail and commands transmission. All packets are integrity checked, end-to-end encrypted, explicitly authenticated by known participants public keys. Onion encryption is applied to relayed packets. Each node acts both as a client and server, can use push and poll behaviour model. Also there is multicasting areas support.
+
+Out-of-box offline sneakernet/floppynet, dead drops, sequential and append-only CD-ROM/tape storages, air-gapped computers support. But online TCP daemon with full-duplex resumable data transmission exists. "
+
+It is based on my [[https://github.com/jgoerzen/docker-debian-base][debian-base-security]] image for Debian bullseye.
+
+# Introduction
+
+You can use the =jgoerzen/nncp= image.  By default, it will:
+
+- Run nncp-daemon, listening on port 5400.  (=systemctl disable nncp-daemon= to disable)
+- Run nncp-caller (systemctl disable can disable caller and toss also)
+- Run nncp-toss, cycle 60, without -seen (edit =/etc/systemd/system/nncp-toss.service= to tweak)
+- Provide reasonable cleanup (=/etc/cron.daily=) and log rotation (=/etc/logrotate.d=) for NNCP files, which you can of course override.
+
+# Files
+
+The NNCP spool directory is =/var/spool/nncp= and is listed as a volume.  It should be owned by the NNCP user (the startup script will fix this if it's not the case).
+
+The NNCP configuration file is expected to reside in =/usr/local/etc/nncp.hjson=.  If you need one, you can run =nncp-cfgen= from within a container.  It should have restrictive permissions; for instance, mode 0400 and owned by the NNCP user.  You can either add it to an image, or mount something over =/usr/local/etc=.  The commands are in =/usr/local/bin/=.
+
+# Invocation
+
+Please see the [[https://github.com/jgoerzen/docker-debian-base#container-invocation][docker-debian-base container invocation]] information.  Generally, for a modern system, you'll use something like this:
+
+#+begin_example
+docker run -td --stop-signal=SIGRTMIN+3 \
+  --tmpfs /run:size=100M --tmpfs /run/lock:size=100M \
+  -v /sys/fs/cgroup:/sys/fs/cgroup:rw --cgroupns=host \
+  --name=nncp jgoerzen/nncp
+#+end_example
+
+Information about the daemons can be found with, eg, =journalctl -u nncp-daemon=.  It is recommended to su to the nncp user before running any nncp commands.
+
+Thanks to using debian-base-security, the container will automatically apply Debian security updates at container start and daily while running.  These security updates do not, however, pertain to NNCP itself.
+
 # Copyright
 
 These files are Copyright (c) 2021 John Goerzen.

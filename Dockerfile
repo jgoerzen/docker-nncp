@@ -14,7 +14,7 @@ COPY sums /tmp
 COPY preinit /usr/local/preinit
 
 RUN set -x && \
-    apt-get -y --no-install-recommends install golang ca-certificates && \
+    apt-get -y --no-install-recommends install golang ca-certificates info && \
     cd /tmp && \
     wget http://www.nncpgo.org/download/nncp-$NNCP_VERSION.tar.xz && \
     sha256sum -c < sums && \
