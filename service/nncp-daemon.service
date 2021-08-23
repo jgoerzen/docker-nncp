@@ -1,0 +1,11 @@
+[Unit]
+Description=Main NNCP daemon
+
+[Service]
+ExecStart=/usr/local/bin/nncp-daemon -noprogress
+Restart=always
+User=nncp
+Group=nncp
+
+[Install]
+WantedBy=multi-user.target
