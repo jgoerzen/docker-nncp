@@ -11,6 +11,7 @@ COPY service/*.service /etc/systemd/system/
 COPY logrotate-nncp /etc/logrotate.d/local-nncp
 COPY cron.daily/* /etc/cron.daily/
 COPY sums /tmp
+COPY preinit /usr/local/preinit
 
 RUN set -x && \
     apt-get -y --no-install-recommends install golang ca-certificates && \
@@ -29,8 +30,10 @@ RUN set -x && \
     systemctl enable nncp-toss && \
     systemctl enable nncp-caller && \
     /usr/local/bin/docker-wipelogs && \
-    mv /usr/sbin/policy-rc.d /usr/sbin/policy-rc.d.disabled
+    mv /usr/sbin/policy-rc.d /usr/sbin/policy-rc.d.disabled && \
+    mkdir /var/spool/nncp  && \
+    chown nncp:nncp /var/spool/nncp
 
-VOLUME ["/var/spool/uucp"]
+VOLUME ["/var/spool/nncp"]
 EXPOSE 5400
 CMD ["/usr/local/bin/boot-debian-base"]
