@@ -32,4 +32,5 @@ RUN set -x && \
     mv /usr/sbin/policy-rc.d /usr/sbin/policy-rc.d.disabled
 
 VOLUME ["/var/spool/uucp"]
+EXPOSE 5400
 CMD ["/usr/local/bin/boot-debian-base"]
