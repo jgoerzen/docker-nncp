@@ -1,0 +1,11 @@
+[Unit]
+Description=Main NNCP tosser
+
+[Service]
+ExecStart=/usr/local/bin/nncp-caller -noprogress
+Restart=always
+User=nncp
+Group=nncp
+
+[Install]
+WantedBy=multi-user.target
