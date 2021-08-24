@@ -1,4 +1,4 @@
 #!/bin/bash
 
-find /var/spool/nncp -name '*.seen' -a -mtime +7 -delete
+find /var/spool/nncp -name '*.seen' -a -mtime +30 -delete
 find /var/spool/nncp -name '*.hdr' -a -mtime +7 -delete
