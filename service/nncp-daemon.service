@@ -1,5 +1,5 @@
 [Unit]
-Description=Main NNCP daemon
+Description=NNCP daemon
 
 [Service]
 ExecStart=/usr/local/bin/nncp-daemon -noprogress

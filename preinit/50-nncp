@@ -3,5 +3,27 @@
 set -x
 set -e
 
+NNCPSPOOL=/var/spool/nncp
+
+# NNCP 7.7.0 migration per Sergey
+
+       find "$NNCPSPOOL" -type f -name "*.hdr" -exec rm {} +
+
+       find "$NNCPSPOOL" -type d -name rx | while read rx ; do
+           cd "$rx"
+           mkdir -p seen
+           chown nncp:nncp seen
+           find . -type f -name "*.seen" | while read fn ; do
+               mv "$fn" "seen/${fn%.seen}"
+           done
+       done
+
+       find "$NNCPSPOOL" -type d -name area | while read area ; do
+           find "$area" -type f -name "*.seen" | while read fn ; do
+               mv "$fn" "${fn%.seen}"
+           done
+       done
+
+# Make sure the permissions are correct
 chown nncp:nncp /var/spool/nncp
 

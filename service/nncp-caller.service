@@ -1,5 +1,5 @@
 [Unit]
-Description=Main NNCP tosser
+Description=NNCP caller
 
 [Service]
 ExecStart=/usr/local/bin/nncp-caller -noprogress
