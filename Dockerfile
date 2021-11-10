@@ -6,7 +6,7 @@ RUN mv /usr/sbin/policy-rc.d.disabled /usr/sbin/policy-rc.d && \
     apt-get clean && \
     adduser --system --group --uid 5001 --disabled-password --disabled-login --shell /bin/bash --group nncp
 
-ENV NNCP_VERSION 8.0.1
+ENV NNCP_VERSION 8.0.2
 COPY service/*.service /etc/systemd/system/
 COPY logrotate-nncp /etc/logrotate.d/local-nncp
 COPY cron.daily/* /etc/cron.daily/
