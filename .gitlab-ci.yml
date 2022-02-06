@@ -12,4 +12,5 @@ docker-build-master:
     - docker push jgoerzen/nncp
     - docker push jgoerzen/nncp:8.5.0
   only:
-    - master
+    - main
+
