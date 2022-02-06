@@ -15,6 +15,7 @@ COPY sums /tmp
 COPY preinit /usr/local/preinit
 
 RUN set -x && \
+    chmod 0644 /etc/systemd/system/*.service && \
     apt-get -y --no-install-recommends install golang ca-certificates info && \
     cd /tmp && \
     wget http://www.nncpgo.org/download/nncp-$NNCP_VERSION.tar.xz && \
