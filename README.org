@@ -1,10 +1,12 @@
 #+TITLE: NNCP for Docker
 
+*NOTE: Github is no longer the source for this package; see its [[https://salsa.debian.org/jgoerzen/docker-nncp][new home on Salsa]].*
+
 This container provides [[https://nncp.mirrors.quux.org/][NNCP]] for Docker.  NNCP is "intended to help build up small size (dozens of nodes) ad-hoc friend-to-friend (F2F) statically routed darknet delay-tolerant networks for fire-and-forget secure reliable files, file requests, Internet mail and commands transmission. All packets are integrity checked, end-to-end encrypted, explicitly authenticated by known participants public keys. Onion encryption is applied to relayed packets. Each node acts both as a client and server, can use push and poll behaviour model. Also there is multicasting areas support.
 
 Out-of-box offline sneakernet/floppynet, dead drops, sequential and append-only CD-ROM/tape storages, air-gapped computers support. But online TCP daemon with full-duplex resumable data transmission exists. "
 
-It is based on my [[https://github.com/jgoerzen/docker-debian-base][debian-base-security]] image for Debian bullseye.
+It is based on my [[https://salsa.debian.org/jgoerzen/docker-debian-base][debian-base-security]] image for Debian bullseye.
 
 * Introduction
 
@@ -23,7 +25,7 @@ The NNCP configuration file is expected to reside in =/usr/local/etc/nncp.hjson=
 
 * Invocation
 
-Please see the [[https://github.com/jgoerzen/docker-debian-base#container-invocation][docker-debian-base container invocation]] information.  Generally, for a modern system, you'll use something like this:
+Please see the [[https://salsa.debian.org/jgoerzen/docker-debian-base#container-invocation][docker-debian-base container invocation]] information.  Generally, for a modern system, you'll use something like this:
 
 #+begin_example
 docker run -td --stop-signal=SIGRTMIN+3 \
