@@ -6,6 +6,7 @@ RUN mv /usr/sbin/policy-rc.d.disabled /usr/sbin/policy-rc.d && \
     apt-get clean && \
     adduser --system --group --uid 5001 --disabled-password --disabled-login --shell /bin/bash --group nncp
 
+### DON'T FORGET TO UPDATE CI WITH THE NEW VERSION WHEN CHANGING THIS!
 ENV NNCP_VERSION 8.5.0
 COPY service/*.service /etc/systemd/system/
 COPY logrotate-nncp /etc/logrotate.d/local-nncp
