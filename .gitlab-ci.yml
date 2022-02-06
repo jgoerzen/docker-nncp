@@ -10,7 +10,7 @@ docker-build-master:
     - umask 0022
     - umask
     - docker info
-    - false
+    - "false"
     - chmod -R og-w .
     - docker build -t jgoerzen/nncp .
     - docker tag jgoerzen/nncp jgoerzen/nncp:8.5.0
