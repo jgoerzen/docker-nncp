@@ -7,10 +7,10 @@ docker-build-master:
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
+    - umask
+    - ls -lR
     - umask 0022
     - umask
-    - docker info
-    - "false"
     - chmod -R og-w .
     - docker build -t jgoerzen/nncp .
     - docker tag jgoerzen/nncp jgoerzen/nncp:8.5.0
