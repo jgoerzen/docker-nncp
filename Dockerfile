@@ -1,6 +1,7 @@
 FROM jgoerzen/debian-base-security:bullseye
 MAINTAINER John Goerzen <jgoerzen@complete.org>
 RUN mv /usr/sbin/policy-rc.d.disabled /usr/sbin/policy-rc.d && \
+    echo "deb http://deb.debian.org/debian bullseye-backports main" >> /etc/apt/sources.list && \
     apt-get update && \
     apt-get -y -u dist-upgrade && \
     apt-get clean && \
@@ -15,7 +16,8 @@ COPY sums /tmp
 COPY preinit /usr/local/preinit
 
 RUN set -x && \
-    apt-get -y --no-install-recommends install golang ca-certificates info && \
+    apt-get -y --no-install-recommends install ca-certificates info && \
+    apt-get -y --no-install-recommends -t bullseye-backports install golang && \
     cd /tmp && \
     wget http://www.nncpgo.org/download/nncp-$NNCP_VERSION.tar.xz && \
     sha256sum -c < sums && \
