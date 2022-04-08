@@ -54,7 +54,7 @@ You can configure how they are started by modifying or overwriting the =/etc/sys
 
 * Copyright
 
-These files are Copyright (c) 2021 John Goerzen.
+These files are Copyright (c) 2021-2022 John Goerzen.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
