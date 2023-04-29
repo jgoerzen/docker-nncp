@@ -9,7 +9,7 @@ RUN mv /usr/sbin/policy-rc.d.disabled /usr/sbin/policy-rc.d && \
 
 ### DON'T FORGET TO UPDATE CI WITH THE NEW VERSION WHEN CHANGING THIS!
 ### Also sums.
-ENV NNCP_VERSION 8.8.2
+ENV NNCP_VERSION 8.8.3
 COPY service/*.service /etc/systemd/system/
 COPY logrotate-nncp /etc/logrotate.d/local-nncp
 COPY cron.daily/* /etc/cron.daily/
@@ -20,7 +20,7 @@ RUN set -x && \
     apt-get -y --no-install-recommends install ca-certificates info && \
     apt-get -y --no-install-recommends -t bullseye-backports install golang && \
     cd /tmp && \
-    wget http://www.nncpgo.org/download/nncp-$NNCP_VERSION.tar.xz && \
+    wget https://nncp.mirrors.quux.org/download/nncp-$NNCP_VERSION.tar.xz && \
     sha256sum -c < sums && \
     tar -xf nncp-$NNCP_VERSION.tar.xz && \
     cd nncp-$NNCP_VERSION && \
