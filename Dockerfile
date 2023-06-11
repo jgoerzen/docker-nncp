@@ -1,7 +1,6 @@
 FROM jgoerzen/debian-base-security:bookworm
 MAINTAINER John Goerzen <jgoerzen@complete.org>
 RUN mv /usr/sbin/policy-rc.d.disabled /usr/sbin/policy-rc.d && \
-    echo "deb http://deb.debian.org/debian bullseye-backports main" >> /etc/apt/sources.list && \
     apt-get update && \
     apt-get -y -u dist-upgrade && \
     apt-get clean && \
