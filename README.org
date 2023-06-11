@@ -6,7 +6,7 @@ This container provides [[https://www.complete.org/nncp/][NNCP]] for Docker.  NN
 
 Out-of-box offline sneakernet/floppynet, dead drops, sequential and append-only CD-ROM/tape storages, air-gapped computers support. But online TCP daemon with full-duplex resumable data transmission exists. "
 
-It is based on my [[https://salsa.debian.org/jgoerzen/docker-debian-base][debian-base-security]] image for Debian bullseye.
+It is based on my [[https://salsa.debian.org/jgoerzen/docker-debian-base][debian-base-security]] image for Debian bookworm.
 
 * Introduction
 
