@@ -13,9 +13,9 @@ docker-build-master:
     - umask
     - chmod -R og-w .
     - docker build -t jgoerzen/nncp .
-    - docker tag jgoerzen/nncp jgoerzen/nncp:8.8.3
+    - docker tag jgoerzen/nncp jgoerzen/nncp:8.9.0
     - docker push jgoerzen/nncp
-    - docker push jgoerzen/nncp:8.8.3
+    - docker push jgoerzen/nncp:8.9.0
   only:
     - main
 
