@@ -26,7 +26,8 @@ RUN set -x && \
     sha256sum -c < sums && \
     tar -xf nncp-$NNCP_VERSION.tar.xz && \
     cd nncp-$NNCP_VERSION && \
-    PREFIX=/usr/local ./contrib/do install && \
+    PREFUX=/usr/local ./bin/build && \
+    PREFIX=/usr/local ./bin/install && \
     cd /tmp && \
     rm -r /tmp/* && \
     dpkg --purge golang && \
