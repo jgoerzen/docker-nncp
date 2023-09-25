@@ -30,7 +30,7 @@ RUN set -x && \
     GO=/usr/lib/go-1.21/bin/go PREFIX=/usr/local ./install && \
     cd /tmp && \
     rm -r /tmp/* && \
-    dpkg --purge golang && \
+    apt-get -y --purge remove 'golang*' && \
     apt-get -y --purge autoremove && \
     apt-get clean && rm -rf /tmp/setup /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     systemctl enable nncp-daemon && \
