@@ -27,7 +27,7 @@ RUN set -x && \
     tar -xf nncp-$NNCP_VERSION.tar.xz && \
     cd nncp-$NNCP_VERSION && \
     GO=/usr/lib/go-1.21/bin/go PREFIX=/usr/local ./bin/build && \
-    GO=/usr/lib/go-1.21/bin/go PREFIX=/usr/local ./bin/install && \
+    GO=/usr/lib/go-1.21/bin/go PREFIX=/usr/local ./install && \
     cd /tmp && \
     rm -r /tmp/* && \
     dpkg --purge golang && \
