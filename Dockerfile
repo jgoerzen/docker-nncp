@@ -38,7 +38,6 @@ RUN set -x && \
     systemctl enable nncp-caller && \
     /usr/local/bin/docker-wipelogs && \
     mv /usr/sbin/policy-rc.d /usr/sbin/policy-rc.d.disabled && \
-    mkdir /var/spool/nncp  && \
     chown nncp:nncp /var/spool/nncp
 
 VOLUME ["/var/spool/nncp"]
