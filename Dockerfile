@@ -16,11 +16,9 @@ COPY cron.daily/* /etc/cron.daily/
 COPY sums /tmp
 COPY preinit /usr/local/preinit
 
-# Could to to just goland instead of goland-1.21-go.  golang-go isn't
-# yet updated in bookworm-backports.
 RUN set -x && \
     apt-get -y --no-install-recommends install ca-certificates info && \
-    apt-get -y --no-install-recommends -t bookworm-backports install golang-1.21-go && \
+    apt-get -y --no-install-recommends -t bookworm-backports install golang-go && \
     cd /tmp && \
     wget https://nncp.mirrors.quux.org/download/nncp-$NNCP_VERSION.tar.xz && \
     sha256sum -c < sums && \
