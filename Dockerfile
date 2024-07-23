@@ -24,8 +24,8 @@ RUN set -x && \
     sha256sum -c < sums && \
     tar -xf nncp-$NNCP_VERSION.tar.xz && \
     cd nncp-$NNCP_VERSION && \
-    GO=/usr/lib/go-1.21/bin/go PREFIX=/usr/local ./bin/build && \
-    GO=/usr/lib/go-1.21/bin/go PREFIX=/usr/local ./install && \
+    PREFIX=/usr/local ./bin/build && \
+    PREFIX=/usr/local ./install && \
     cd /tmp && \
     rm -r /tmp/* && \
     apt-get -y --purge remove 'golang*' && \
