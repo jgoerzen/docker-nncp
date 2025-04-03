@@ -16,6 +16,8 @@ docker-build-master:
     - docker tag jgoerzen/nncp jgoerzen/nncp:8.11.0
     - docker push jgoerzen/nncp
     - docker push jgoerzen/nncp:8.11.0
+    - "curl -X POST -F token=$CI_DOCKER_NNCPNET_MAILNODE_TRIGGER -F ref=main https://salsa.debian.org/api/v4/projects/99475/trigger/pipeline"
+
   only:
     - main
 
