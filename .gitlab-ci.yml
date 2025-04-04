@@ -31,8 +31,7 @@ before_script:
     - umask 0022
     - umask
     - chmod -R og-w .
-    - PLATSTRING="`echo "$PLATFORM" | sed 's,/,_,g'`" docker buildx build --load --platform $PLATFORM -t jgoerzen/nncp:latest-$PLATSTRING .
-    - PLATSTRING="`echo "$PLATFORM" | sed 's,/,_,g'`" docker push jgoerzen/nncp:latest-$PLATSTRING
+    - ./build-multi.sh
 
   only:
     - main
