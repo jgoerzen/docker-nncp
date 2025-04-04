@@ -1,24 +1,66 @@
-docker-build-master:
+# Multiarch:
+# Ideas from https://stackoverflow.com/questions/61430005/gitlab-ci-cd-building-multiarch-docker-images
+# and https://github.com/oofnikj/nuttssh/blob/multiarch/.gitlab-ci.yml
+
+variables:
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_TLS_CERTDIR: ""
+  DOCKER_TLS_VERIFY: ""
+  NNCP_VER: 8.11.0
+
+before_script:
+  - apk add ca-certificates
+  - apk add git
+  - apk add bash
+  - apk add curl
+  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+  - docker buildx create --use
+  - docker buildx version
+  - docker buildx inspect --bootstrap
+
+.docker-build-master:
   # Official docker image.
-  image: docker:latest
+  image: jgoerzen/docker-multi-arch
   stage: build
   services:
     - docker:dind
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
     - umask
     - ls -lR
     - umask 0022
     - umask
-    - apk add curl
     - chmod -R og-w .
-    - docker build -t jgoerzen/nncp .
-    - docker tag jgoerzen/nncp jgoerzen/nncp:8.11.0
-    - docker push jgoerzen/nncp
-    - docker push jgoerzen/nncp:8.11.0
-    - "curl -X POST -F token=$CI_DOCKER_NNCPNET_MAILNODE_TRIGGER -F ref=main https://salsa.debian.org/api/v4/projects/99475/trigger/pipeline"
+    - PLATSTRING="`echo "$PLATFORM" | sed 's,/,_,g'`" docker buildx build --load --platform $PLATFORM -t jgoerzen/nncp:latest-$PLATSTRING .
+    - PLATSTRING="`echo "$PLATFORM" | sed 's,/,_,g'`" docker push jgoerzen/nncp:latest-$PLATSTRING
 
   only:
     - main
 
+docker-build-master-amd64:
+  extends: .docker-build-master
+  variables:
+    PLATFORM: linux/amd64
+
+docker-build-master-arm64:
+  extends: .docker-build-master
+  variables:
+    PLATFORM: linux/arm64
+
+docker-build-master-armhf:
+  extends: .docker-build-master
+  variables:
+    PLATFORM: linux/arm/v7
+
+release:
+  image: jgoerzen/docker-multi-arch
+  services:
+    - docker:dind
+  only:
+    - main
+  stage: deploy
+  needs: ["docker-build-master-amd64", "docker-build-master-arm64", "docker-build-master-armhf"]
+  script:
+    - docker buildx imagetools create -t jgoerzen/nncp:latest jgoerzen/nncp:latest-linux_amd64 jgoerzen/nncp:latest-linux_arm64 jgoerzen/nncp:latest-arm_v7
+    - docker buildx imagetools create -t jgoerzen/nncp:$NNCP_VER jgoerzen/nncp:latest-linux_amd64 jgoerzen/nncp:latest-linux_arm64 jgoerzen/nncp:latest-arm_v7
+    - "curl -X POST -F token=$CI_DOCKER_NNCPNET_MAILNODE_TRIGGER -F ref=main https://salsa.debian.org/api/v4/projects/99475/trigger/pipeline"
