@@ -60,6 +60,6 @@ release:
   stage: deploy
   needs: ["docker-build-master-amd64", "docker-build-master-arm64", "docker-build-master-armhf"]
   script:
-    - docker buildx imagetools create -t jgoerzen/nncp:latest jgoerzen/nncp:latest-linux_amd64 jgoerzen/nncp:latest-linux_arm64 jgoerzen/nncp:latest-arm_v7
-    - docker buildx imagetools create -t jgoerzen/nncp:$NNCP_VER jgoerzen/nncp:latest-linux_amd64 jgoerzen/nncp:latest-linux_arm64 jgoerzen/nncp:latest-arm_v7
+    - docker buildx imagetools create -t jgoerzen/nncp:latest jgoerzen/nncp:latest-linux_amd64 jgoerzen/nncp:latest-linux_arm64 jgoerzen/nncp:latest-linux_arm_v7
+    - docker buildx imagetools create -t jgoerzen/nncp:$NNCP_VER jgoerzen/nncp:latest-linux_amd64 jgoerzen/nncp:latest-linux_arm64 jgoerzen/nncp:latest-linux_arm_v7
     - "curl -X POST -F token=$CI_DOCKER_NNCPNET_MAILNODE_TRIGGER -F ref=main https://salsa.debian.org/api/v4/projects/99475/trigger/pipeline"
