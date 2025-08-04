@@ -1,4 +1,4 @@
-FROM jgoerzen/debian-base-security:bookworm
+FROM jgoerzen/debian-base-security:trixie
 MAINTAINER John Goerzen <jgoerzen@complete.org>
 RUN mv /usr/sbin/policy-rc.d.disabled /usr/sbin/policy-rc.d && \
     apt-get update && \
@@ -18,7 +18,7 @@ COPY preinit /usr/local/preinit
 
 RUN set -x && \
     apt-get -y --no-install-recommends install ca-certificates info && \
-    apt-get -y --no-install-recommends -t bookworm-backports install golang-go && \
+    apt-get -y --no-install-recommends install golang-go && \
     cd /tmp && \
     wget https://nncp.mirrors.quux.org/download/nncp-$NNCP_VERSION.tar.xz && \
     sha256sum -c < sums && \

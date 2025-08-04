@@ -20,7 +20,6 @@ before_script:
   - docker buildx inspect --bootstrap
 
 .docker-build-master:
-  # Official docker image.
   image: jgoerzen/docker-multi-arch
   stage: build
   services:
