@@ -30,7 +30,7 @@ RUN set -x && \
     rm -r /tmp/* && \
     apt-get -y --purge remove 'golang*' && \
     apt-get -y --purge autoremove && \
-    apt-get clean && rm -rf /tmp/setup /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    apt-get clean && rm -rf /tmp/setup /var/lib/apt/lists/* /tmp/* /var/tmp/* /root/.cache/go-build && \
     systemctl enable nncp-daemon && \
     systemctl enable nncp-toss && \
     systemctl enable nncp-caller && \
