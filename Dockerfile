@@ -9,7 +9,7 @@ RUN mv /usr/sbin/policy-rc.d.disabled /usr/sbin/policy-rc.d && \
 
 ### DON'T FORGET TO UPDATE CI WITH THE NEW VERSION WHEN CHANGING THIS!
 ### Also sums.
-ENV NNCP_VERSION 8.11.0
+ENV NNCP_VERSION 8.12.1
 COPY service/*.service /etc/systemd/system/
 COPY logrotate-nncp /etc/logrotate.d/local-nncp
 COPY cron.daily/* /etc/cron.daily/
