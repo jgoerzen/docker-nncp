@@ -24,7 +24,7 @@ RUN set -x && \
     sha256sum -c < sums && \
     tar -xf nncp-$NNCP_VERSION.tar.xz && \
     cd nncp-$NNCP_VERSION && \
-    PREFIX=/usr/local ./bin/build && \
+    PREFIX=/usr/local ./build && \
     PREFIX=/usr/local ./install && \
     cd /tmp && \
     rm -r /tmp/* && \
