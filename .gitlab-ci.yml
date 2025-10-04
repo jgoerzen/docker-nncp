@@ -6,7 +6,7 @@ variables:
   DOCKER_HOST: tcp://docker:2375
   DOCKER_TLS_CERTDIR: ""
   DOCKER_TLS_VERIFY: ""
-  NNCP_VER: 8.12.1
+  NNCP_VER: 8.13.0
 
 before_script:
   - apk add ca-certificates
